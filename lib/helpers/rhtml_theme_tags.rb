@@ -2,8 +2,6 @@ require 'cgi'
 require 'action_view/helpers/url_helper'
 require 'action_view/helpers/tag_helper'
  
-# A HUGE thanks to svenfuchs for allowing me the chance to view this code. it fit perfectly in the
-#theme_support helper method.
 # "/Users/sven/Development/projects/adva-cms/adva-cms/themes/site-1/theme-1/stylesheets/styles.css"
 # "/Users/sven/Development/projects/adva-cms/adva-cms/themes/theme-1/stylesheets/styles.css"
  
@@ -245,6 +243,14 @@ module ActionView
           private
             def tag_class
               ThemeStylesheetTag
+            end
+        end
+        class ThemeImageSources < ImageSources
+          include ThemeAssetCollection
+ 
+          private
+            def tag_class
+              ThemeImageTag
             end
         end
     end
