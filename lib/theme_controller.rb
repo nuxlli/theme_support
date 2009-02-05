@@ -5,7 +5,7 @@ class ThemeController < ActionController::Base
   after_filter :cache_theme_files
   
   def stylesheets
-    render_theme_item(:stylesheets, params[:filename].to_s, params[:theme], 'text/css')
+    render_theme_item(:stylesheets, params[:filename].join('/'), params[:theme])
   end
 
   def javascript
