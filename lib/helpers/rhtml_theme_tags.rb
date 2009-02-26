@@ -73,6 +73,8 @@ module ActionView
  
       def theme_image_tag(theme_name, source, options = {})
         options.symbolize_keys!
+
+        theme_name, options, source = controller.current_theme, source, theme_name if source.is_a?(Hash)
  
         options[:src] = path_to_theme_image(theme_name, source)
         options[:alt] ||= File.basename(options[:src], '.*').split('.').first.to_s.capitalize
