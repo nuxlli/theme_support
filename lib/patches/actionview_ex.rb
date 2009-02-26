@@ -9,25 +9,13 @@ module ActionView
   
   private
     def _pick_template(template_path)
-      search_path = [
+      
+      self.view_paths = [
         "#{RAILS_ROOT}/themes/#{controller.current_theme}/views",       # for components
         "#{RAILS_ROOT}/themes/#{controller.current_theme}",             # for layouts
-      ]
-      return template_path if template_path.respond_to?(:render)
-
-      path = template_path.sub(/^\//, '')
-      if m = path.match(/(.*)\.(\w+)$/)
-        template_file_name, template_file_extension = m[1], m[2]
-      else
-        template_file_name = path
-      end
-    
-      themed_file = File.join(search_path[0], "#{template_file_name}.#{template_format}.erb")
-      if File.exists?(themed_file)
-        return Template.new(themed_file, search_path)
-      else
-        return theme_support_old_pick_template(template_path)
-      end
+      ] + self.view_paths
+      
+      return theme_support_old_pick_template(template_path)
     end
   
   # def force_liquid?
